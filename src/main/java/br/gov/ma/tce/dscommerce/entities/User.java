@@ -14,6 +14,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Column(unique = true) //configurando que o campo email será único no mapeamento. Nao permitindo a repeticao
     private String email;
     private String phone;
     private LocalDate birthDate;
