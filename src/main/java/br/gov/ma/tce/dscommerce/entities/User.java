@@ -81,6 +81,7 @@ public class User {
         this.id = id;
     }
 
+    //Listas não devem ser settadas. Apenas remover e adicionar elementos
     public List<Order> getOrders() {
         return orders;
     }
