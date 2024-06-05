@@ -3,6 +3,7 @@ package br.gov.ma.tce.dscommerce.entities;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -27,7 +28,7 @@ public class Product {
     private Set<Category> categories = new HashSet<>();
 
     @OneToMany(mappedBy = "id.product")
-    private Set<OrderItem> items = new HashSet<>();
+    private Set<OrderItem> items = new HashSet<>(); //A partir do Product é possível acessar os Items
 
     public Product() {}
 
@@ -81,5 +82,14 @@ public class Product {
 
     public Set<Category> getCategories() {
         return categories;
+    }
+
+    public Set<OrderItem> getItems() {
+        return items;
+    }
+
+    //pegar o items e para cada objeto x do tipo ordemItems, pegamos o Order e convertemos para lista.
+    public List<Order> getOrders() {
+        return items.stream().map(x -> x.getOrder()).toList();
     }
 }

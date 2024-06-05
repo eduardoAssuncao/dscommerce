@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.Instant;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,7 +26,7 @@ public class Order {
     private Payment payment;
 
     @OneToMany(mappedBy = "id.order")
-    private Set<OrderItem> orderItems = new HashSet<>();
+    private Set<OrderItem> items = new HashSet<>(); //A partir do Order é possível acessar os items
 
     public Order() {}
 
@@ -75,5 +76,14 @@ public class Order {
 
     public void setPayment(Payment payment) {
         this.payment = payment;
+    }
+
+    public Set<OrderItem> getOrderItems() {
+        return items;
+    }
+
+    //Para pegar os produtos, convertendo cada elemento de OrdemItem para Product, pegando só o produto associado. Contruindo uma lista de Product e não de OrdemItems
+    public List<Product> getProducts() {
+        return items.stream().map(x -> x.getProduct()).toList();
     }
 }
