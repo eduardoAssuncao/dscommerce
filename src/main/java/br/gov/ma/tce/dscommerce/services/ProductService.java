@@ -37,4 +37,11 @@ public class ProductService {
         //O Page já é um stream do java
         return result.map(x -> new ProductDTO(x));
     }
+
+    @Transactional
+    public ProductDTO insert(ProductDTO dto) {
+        Product entity = new Product(dto);
+        entity = productRepository.save(entity);
+        return new ProductDTO(entity);
+    }
 }

@@ -1,5 +1,6 @@
 package br.gov.ma.tce.dscommerce.entities;
 
+import br.gov.ma.tce.dscommerce.dto.ProductDTO;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -32,6 +33,13 @@ public class Product {
     private Set<OrderItem> items = new HashSet<>(); //A partir do Product é possível acessar os Items
 
     public Product() {}
+
+    public Product(ProductDTO dto) {
+        this.name = dto.getName();
+        this.description = dto.getDescription();
+        this.price = dto.getPrice();
+        this.imgUrl = dto.getImgUrl();
+    }
 
     public Product(Long id, String name, String description, Double price, String imgUrl) {
         this.id = id;
