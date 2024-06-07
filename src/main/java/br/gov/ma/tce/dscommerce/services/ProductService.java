@@ -55,6 +55,11 @@ public class ProductService {
         return new ProductDTO(entity);
     }
 
+    @Transactional //readOnly -> look de apenas leitura
+    public void delete(Integer id) {
+        productRepository.deleteById(id);
+    }
+
     private void copyDtoToEntity(ProductDTO dto, Product entity) {
         entity.setName(dto.getName());
         entity.setDescription(dto.getDescription());
