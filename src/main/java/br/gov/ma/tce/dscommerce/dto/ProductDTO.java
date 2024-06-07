@@ -15,6 +15,9 @@ public class ProductDTO {
     private Double price;
     private String imgUrl;
 
+    //Uma biblioteca para realizar a cópia dos dados da minha entidade para o DTO é o ModelMapper
+    //Ela realiza a copia de atributos de mesmo nome de um objeto para outro.
+    //https://www.baeldung.com/java-modelmapper
     public ProductDTO(Product product) {
         id = product.getId();
         name = product.getName();
