@@ -34,12 +34,14 @@ public class Product {
 
     public Product() {}
 
+    /*
+    //Usa solução para não ter que criar um metodo de cópia de um Dto para uma entidade. Não não é mencionado no video tutorial
     public Product(ProductDTO dto) {
         this.name = dto.getName();
         this.description = dto.getDescription();
         this.price = dto.getPrice();
         this.imgUrl = dto.getImgUrl();
-    }
+    }*/
 
     public Product(Long id, String name, String description, Double price, String imgUrl) {
         this.id = id;
