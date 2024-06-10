@@ -2,6 +2,9 @@ package br.gov.ma.tce.dscommerce.entities;
 
 import br.gov.ma.tce.dscommerce.dto.ProductDTO;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 import java.util.HashSet;
 import java.util.List;
