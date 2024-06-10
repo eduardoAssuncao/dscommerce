@@ -1,5 +1,6 @@
 package br.gov.ma.tce.dscommerce.controllers;
 
+import br.gov.ma.tce.dscommerce.dto.CustomError;
 import br.gov.ma.tce.dscommerce.dto.ProductDTO;
 import br.gov.ma.tce.dscommerce.services.ProductService;
 import org.springframework.data.domain.Page;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.time.Instant;
 
 @RestController
 //o @RequiredArgsContructor não tá funcionando
@@ -26,6 +28,18 @@ public class ProductController {
         ProductDTO dto = productService.findById(id);
         return ResponseEntity.ok(dto);
     }
+
+    //Quando não utilizamos o @ControllerAdvice é necessário usar o try-catch em várias partes do código.
+    /*@GetMapping("/{id}")
+    public ResponseEntity<?> findById(@PathVariable Integer id){
+        try{
+            ProductDTO dto = productService.findById(id);
+            return ResponseEntity.ok(dto);
+        }catch(Exception e){
+            CustomError err = new CustomError(Instant.now(), 404, e.getMessage(), "Caminho");
+            return ResponseEntity.status(404).body(err);
+        }
+    }*/
 
     //http://localhost:8080/products?size=12 -> argumento para que haja o retorno de apenas 12 objetos por página
     //http://localhost:8080/products?size=12&page=1 -> argumento para que retorne à partir da segunda página
