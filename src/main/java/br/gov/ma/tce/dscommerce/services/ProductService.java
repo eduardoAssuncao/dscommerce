@@ -25,7 +25,8 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    @Transactional(readOnly = true) //readOnly -> look de apenas leitura
+    //A annotation @Transactional assegura resolução da transação com o banco de dados e resolução de todas pendências "lazy" com o banco de dados.
+    @Transactional(readOnly = true) //readOnly -> look de apenas leitura, melhorando a peformance
     public ProductDTO findById(Integer id) {
         /*Optional<Product> result = productRepository.findById(id);
         Product product = result.get();
@@ -37,9 +38,17 @@ public class ProductService {
         return new ProductDTO(product);
     }
 
-    @Transactional(readOnly = true) //readOnly -> look de apenas leitura
+    /*@Transactional(readOnly = true) //readOnly -> look de apenas leitura
     public Page<ProductDTO> findAll(Pageable pageable) {
         Page<Product> result = productRepository.findAll(pageable);
+        //converter em uma lista de ProductDTO. Pra cada registro da minha lista original, irei chamar o new ProductDTO recebendo x e depois converto para Lista
+        //O Page já é um stream do java
+        return result.map(x -> new ProductDTO(x));
+    }*/
+
+    @Transactional(readOnly = true) //readOnly -> look de apenas leitura
+    public Page<ProductDTO> findAll(String name, Pageable pageable) {
+        Page<Product> result = productRepository.searchByName(name, pageable);
         //converter em uma lista de ProductDTO. Pra cada registro da minha lista original, irei chamar o new ProductDTO recebendo x e depois converto para Lista
         //O Page já é um stream do java
         return result.map(x -> new ProductDTO(x));

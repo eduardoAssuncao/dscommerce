@@ -43,9 +43,16 @@ public class ProductController {
     //http://localhost:8080/products?size=12 -> argumento para que haja o retorno de apenas 12 objetos por página
     //http://localhost:8080/products?size=12&page=1 -> argumento para que retorne à partir da segunda página
     //http://localhost:8080/products?size=12&page=0&sort=name,desc -> argumento para retornar ordenado por nome e decrescente
-    @GetMapping
+    /*@GetMapping
     public ResponseEntity<Page<ProductDTO>> findAll(Pageable pageable){
         Page<ProductDTO> dto = productService.findAll(pageable);
+        return ResponseEntity.ok(dto);
+    }*/
+
+    //Podemos usar o encodeURI do JS para verifiar como passar os parametros de name na nossa requisição
+    @GetMapping
+    public ResponseEntity<Page<ProductDTO>> findAll(@RequestParam(name = "name", defaultValue = "") String name, Pageable pageable){
+        Page<ProductDTO> dto = productService.findAll(name, pageable);
         return ResponseEntity.ok(dto);
     }
 
