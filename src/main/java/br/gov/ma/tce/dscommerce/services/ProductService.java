@@ -1,6 +1,7 @@
 package br.gov.ma.tce.dscommerce.services;
 
 import br.gov.ma.tce.dscommerce.dto.ProductDTO;
+import br.gov.ma.tce.dscommerce.dto.ProductMinDTO;
 import br.gov.ma.tce.dscommerce.entities.Product;
 import br.gov.ma.tce.dscommerce.repositories.ProductRepository;
 import br.gov.ma.tce.dscommerce.services.exceptions.DatabaseException;
@@ -47,11 +48,11 @@ public class ProductService {
     }*/
 
     @Transactional(readOnly = true) //readOnly -> look de apenas leitura
-    public Page<ProductDTO> findAll(String name, Pageable pageable) {
+    public Page<ProductMinDTO> findAll(String name, Pageable pageable) {
         Page<Product> result = productRepository.searchByName(name, pageable);
         //converter em uma lista de ProductDTO. Pra cada registro da minha lista original, irei chamar o new ProductDTO recebendo x e depois converto para Lista
         //O Page já é um stream do java
-        return result.map(x -> new ProductDTO(x));
+        return result.map(x -> new ProductMinDTO(x));
     }
 
     @Transactional

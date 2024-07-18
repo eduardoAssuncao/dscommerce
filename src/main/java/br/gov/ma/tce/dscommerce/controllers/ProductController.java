@@ -1,6 +1,7 @@
 package br.gov.ma.tce.dscommerce.controllers;
 
 import br.gov.ma.tce.dscommerce.dto.ProductDTO;
+import br.gov.ma.tce.dscommerce.dto.ProductMinDTO;
 import br.gov.ma.tce.dscommerce.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -53,8 +54,8 @@ public class ProductController {
 
     //Podemos usar o encodeURI do JS para verifiar como passar os parametros de name na nossa requisição
     @GetMapping
-    public ResponseEntity<Page<ProductDTO>> findAll(@RequestParam(name = "name", defaultValue = "") String name, Pageable pageable){
-        Page<ProductDTO> dto = productService.findAll(name, pageable);
+    public ResponseEntity<Page<ProductMinDTO>> findAll(@RequestParam(name = "name", defaultValue = "") String name, Pageable pageable){
+        Page<ProductMinDTO> dto = productService.findAll(name, pageable);
         return ResponseEntity.ok(dto);
     }
 
