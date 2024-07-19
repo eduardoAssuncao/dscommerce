@@ -1,12 +1,17 @@
 package br.gov.ma.tce.dscommerce.dto;
 
+import br.gov.ma.tce.dscommerce.entities.Category;
 import br.gov.ma.tce.dscommerce.entities.Product;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,6 +29,9 @@ public class ProductDTO {
     private Double price;
     private String imgUrl;
 
+    @NotEmpty(message = "Deve ter pelo menos uma categoria")
+    private List<CategoryDTO> categories = new ArrayList<>();
+
     //Uma biblioteca para realizar a cópia dos dados da minha entidade para o DTO é o ModelMapper
     //Ela realiza a copia de atributos de mesmo nome de um objeto para outro.
     //https://www.baeldung.com/java-modelmapper
@@ -33,5 +41,8 @@ public class ProductDTO {
         description = product.getDescription();
         price = product.getPrice();
         imgUrl = product.getImgUrl();
+        for (Category cat : product.getCategories()) {
+            categories.add(new CategoryDTO(cat));
+        }
     }
 }

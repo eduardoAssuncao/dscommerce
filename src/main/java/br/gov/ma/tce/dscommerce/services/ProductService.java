@@ -1,7 +1,9 @@
 package br.gov.ma.tce.dscommerce.services;
 
+import br.gov.ma.tce.dscommerce.dto.CategoryDTO;
 import br.gov.ma.tce.dscommerce.dto.ProductDTO;
 import br.gov.ma.tce.dscommerce.dto.ProductMinDTO;
+import br.gov.ma.tce.dscommerce.entities.Category;
 import br.gov.ma.tce.dscommerce.entities.Product;
 import br.gov.ma.tce.dscommerce.repositories.ProductRepository;
 import br.gov.ma.tce.dscommerce.services.exceptions.DatabaseException;
@@ -92,5 +94,12 @@ public class ProductService {
         entity.setDescription(dto.getDescription());
         entity.setPrice(dto.getPrice());
         entity.setImgUrl(dto.getImgUrl());
+
+        entity.getCategories().clear();
+        for (CategoryDTO catDto : dto.getCategories()) {
+            Category cat = new Category();
+            cat.setId(catDto.getId());
+            entity.getCategories().add(cat);
+        }
     }
 }
