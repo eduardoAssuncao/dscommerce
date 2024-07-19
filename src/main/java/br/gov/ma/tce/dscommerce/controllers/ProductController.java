@@ -26,7 +26,7 @@ public class ProductController {
 
     //@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')")
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDTO> findById(@PathVariable Integer id){
+    public ResponseEntity<ProductDTO> findById(@PathVariable Long id){
         ProductDTO dto = productService.findById(id);
         return ResponseEntity.ok(dto);
     }
@@ -71,14 +71,14 @@ public class ProductController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<ProductDTO> update(@PathVariable Integer id, @Valid @RequestBody ProductDTO dto){ //O @Valid precisa ser colocada antes do corpo
+    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @Valid @RequestBody ProductDTO dto){ //O @Valid precisa ser colocada antes do corpo
         dto = productService.update(id, dto);
         return ResponseEntity.ok(dto);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id){
+    public ResponseEntity<Void> delete(@PathVariable Long id){
         productService.delete(id);
         return ResponseEntity.noContent().build();
     }

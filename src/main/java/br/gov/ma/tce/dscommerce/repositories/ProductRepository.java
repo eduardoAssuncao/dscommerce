@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Integer> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
     //para métodos customizados, devemos adotar um padrao para nao entrar em conplito com o padrao do Repository e do QueryMethod
     @Query("SELECT obj FROM Product obj " +

@@ -3,6 +3,7 @@ package br.gov.ma.tce.dscommerce.dto;
 import br.gov.ma.tce.dscommerce.entities.Order;
 import br.gov.ma.tce.dscommerce.entities.OrderItem;
 import br.gov.ma.tce.dscommerce.entities.OrderStatus;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class OrderDTO {
     private ClientDTO client;
     private PaymentDTO payment;
 
+    @NotEmpty(message = "Deve ter pelo menos um item")
     private List<OrderItemDTO> items = new ArrayList<>();
 
     public OrderDTO(Long id, Instant moment, OrderStatus status, ClientDTO client, PaymentDTO payment) {

@@ -30,7 +30,7 @@ public class ProductService {
 
     //A annotation @Transactional assegura resolução da transação com o banco de dados e resolução de todas pendências "lazy" com o banco de dados.
     @Transactional(readOnly = true) //readOnly -> look de apenas leitura, melhorando a peformance
-    public ProductDTO findById(Integer id) {
+    public ProductDTO findById(Long id) {
         /*Optional<Product> result = productRepository.findById(id);
         Product product = result.get();
         ProductDTO productDTO = new ProductDTO(product);
@@ -66,7 +66,7 @@ public class ProductService {
     }
 
     @Transactional
-    public ProductDTO update(Integer id ,ProductDTO dto) {
+    public ProductDTO update(Long id ,ProductDTO dto) {
         try{
             Product entity = productRepository.getReferenceById(id);
             copyDtoToEntity(dto, entity);
@@ -78,7 +78,7 @@ public class ProductService {
     }
 
     @Transactional(propagation = Propagation.SUPPORTS) // Executará a transação se estiver no contexto de outra transação
-    public void delete(Integer id) {
+    public void delete(Long id) {
         if(!productRepository.existsById(id)){
             throw new ResourceNotFoundException("Recurso não encontrado");
         }
